@@ -40,6 +40,15 @@ config :esbuild,
     env: %{"NODE_PATH" => [Path.expand("../deps", __DIR__), Mix.Project.build_path()]}
   ]
 
+config :elixir_todo_list, ElixirTodoList.Repo,
+  database: "elixir_todo_list.db",
+  priv: "priv/repo"
+
+config :elixir_todo_list, ecto_repos: [ElixirTodoList.Repo]
+
+
+
+
 # Configure tailwind (the version is required)
 config :tailwind,
   version: "4.1.12",
