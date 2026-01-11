@@ -91,10 +91,16 @@ end
 def render(assigns) do
   ~H"""
   <div class="w-full max-w-lg mx-auto mt-12 p-6 bg-white rounded-lg shadow-md">
+
+    <!-- FLASH MESSAGES -->
+    <.flash kind={:info} flash={@flash} class="mb-4 text-center" />
+    <.flash kind={:error} flash={@flash} class="mb-4 text-center" />
+
     <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">
       Minha Lista de Tarefas (com DB!)
     </h1>
 
+    <!-- FORM NOVA TAREFA -->
     <.form for={@form} id="task-form" phx-submit="save_task">
       <.input
         field={@form[:title]}
@@ -102,9 +108,12 @@ def render(assigns) do
         label="Nova Tarefa"
         placeholder="O que precisa ser feito?"
       />
-      <.button phx-disable-with="Salvando...">Adicionar Tarefa</.button>
+      <.button phx-disable-with="Salvando...">
+        Adicionar Tarefa
+      </.button>
     </.form>
 
+    <!-- LISTA DE TAREFAS -->
     <div class="mt-8">
       <ul id="task-list">
         <li
@@ -115,6 +124,7 @@ def render(assigns) do
 
           <% task_form = Task.changeset(task, %{}) |> to_form() %>
 
+          <!-- CHECKBOX + TITULO -->
           <.form
             for={task_form}
             phx-change="toggle_complete"
@@ -128,27 +138,33 @@ def render(assigns) do
                 class="flex-shrink-0"
               />
 
-              <label class={if task.completed,
-                do: "line-through text-gray-500",
-                else: "text-gray-900"}
+              <label
+                class={
+                  if task.completed,
+                    do: "line-through text-gray-400 italic",
+                    else: "text-gray-900 font-medium"
+                }
               >
                 <%= task.title %>
               </label>
             </div>
           </.form>
 
+          <!-- BOTÃO EXCLUIR -->
           <.button
             type="button"
             phx-click="delete"
             phx-value-id={task.id}
-            class="!p-1 !bg-red-500 hover:!bg-red-700"
+            class="!p-2 !bg-red-600 hover:!bg-red-700 text-white font-bold rounded-full"
           >
             &times;
           </.button>
+
         </li>
       </ul>
     </div>
   </div>
   """
 end
+
 end
