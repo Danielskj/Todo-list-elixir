@@ -11,12 +11,16 @@ Deletar tarefas.
 Interface interativa sem reload de página (via LiveView).
 
 📌 Informações do Aluno
+
 Nome do Aluno: 
 Carlos Daniel dos Santos Silva
+
 Professor: 
 Sergio Costa
+
 Curso: 
 Engenharia da Computação
+
 Universidade: 
 Universidade Federal do Maranhão (UFMA)
 
